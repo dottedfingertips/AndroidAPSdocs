@@ -30,14 +30,16 @@ If you started using Medtronic driver please add yourself to this [list](https:/
 
 A comparision chart for the various Rileylink compatible devices can be found at [getrileylink.org](https://getrileylink.org/rileylink-compatible-hardware-comparison-chart?fbclid=IwAR2vHbOzla-zmM-cSp4NkOB_23k3spgnaYvCIGRcACcIQ25FJAU_7HRkH2A)
 
-For communication with Pump you need device that converts BT commands from Phone into RF commands that Pump understands. Device that does is called RileyLink (you can get it here [getrileylink.org](https://getrileylink.org/)). You need stable version of device, which is for older models firmware 0.9 (older versions might not work correctly) or for newer models 2.2 (there are options to upgrade available on RL site). If you are feeling adventurous you can also try Gnarl ([here](https://github.com/ecc1/gnarl)), which is sort-of RileyLink-clone.
+QUESTION - KEEP GNARL?
 
 ## Configuration of the pump
-- **Enable remote mode on Pump** (Utilities -> Remote Options, Select Yes, and on next screen do Add ID and add dummy id (111111 or something). You need to at least one ID on that Remote IDs list. This options might look differently on different model of pump. This step is important, because when set, Pump will listen more often for remote communication.
-- **Set Max Basal** on your Pump to your "max basal entry in your STD profile" * 4 (if you want to have 400% TBR as max). This number must be under 35 (as you can see in pump).
-- **Set Max Bolus** on your Pump (max is 25)
-- **Set profile to STD**. This will be the only profile we will use. You can also disable.
-- **Set TBR type** to Absolute (not Percent)
+The following settings should be configured on the pump in order for AAPS to remotely send commands.  The steps necessary to make each change on a Medtronic 722 are shown in brackets for each setting.  The exact steps may vary based on pump type and/or firmware version.
+
+- **Enable remote mode on Pump** (On the pump press Act and go to Utilities -> Remote Options, Select On, and on next screen do Add ID and add any random id such as  111111). At least one ID must be on the Remote ID list in order for the pump to expect remote communication.
+- **Set Max Basal** (On the pump press Act and got to Basal and then select Max Basal Rate) As an example setting this value to four times your maximum standard basal rate would allow a 400% Temporary Basal Rate. The maximum value permitted by the pump is 34.9 units per hour.
+- **Set Max Bolus** (On the pump press Act and to to Bolus and then select Max Bolus) This is the largest bolus that the pump will accept.  The maximum value permitted by the pump is 25.
+- **Set profile to Standard**. (On the pump press Act and go to Basal and then Select Patterns) The pump will only need one profile as AAPS will manage different profiles on your phone.  No other patterns are required.
+- **Set Temporary Basal Rate type** (On the pump press Act and go to Basal and then Temp Basal Type).  Select Absolute (not Percent).
  
 
 ## Configuration of Phone/AndroidAPS
