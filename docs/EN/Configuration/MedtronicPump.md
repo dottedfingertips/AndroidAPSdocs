@@ -1,28 +1,36 @@
 # Medtronic Pumps
 
-**>>>> Medtronic pump driver is from 2.5 version part of AndroidAPS (master). While this is the case, Medtronic driver should still be considered beta software. Please install only if you are expirenced user. At the moment we are still fighting with double Bolus issue (We get 2 boluses in treatments, which throws IOB calculation (if you experience this bug, please enable Double Bolus Logging in Medtronic configuration and provide your logs)), this should be fixed with upcomming release. <<<<**
-
 ***
 
-Works only with older Medtronic pumps (details see below). Does not work with Medtronic 640G or 670G.
+The Medtronic pump driver only works with older pump models.  The driver does not work with newer models such as the 640G, 670G or 780G.
+
+The following model and firmware combinations are compatible:
+    - 512/712 (any firmware version)
+    - 515/715 (any firmware version)
+    - 522/722 (any firmware version)
+    - 523/723 (firmware 2.4A or lower)
+    - 554/754 EU release (firmware 2.6A or lower)
+    - 554/754 Canada release (firmware 2.7A or lower)
+
+You can find out how to check the firmware on the pumps at [OpenAPS docs](https://openaps.readthedocs.io/en/latest/docs/Gear%20Up/pump.html#how-to-check-pump-firmware-check-for-absence-of-pc-connect) or [LoopDocs](https://loopkit.github.io/loopdocs/build/step3/#medtronic-pump-firmware).
 
 ***
-
+QUESTION - IS THIS STILL NEEDED?
 If you started using Medtronic driver please add yourself to this [list](https://docs.google.com/spreadsheets/d/16XIjviXe8b-12PrB6brGubNFuAEsFZr10pjLt_SpSFQ/edit#gid=0). This is just so that we can see which Phones are good and which are not so good (or bad) for this driver. There is one column called "BT restart". This is to check if yourPhone supports BT enable/disable, which can be used when pump is no longer able to connect, that happens from time to time. If you notice any other problem, please write that in Comments column.
 
 ***
 
 ## Hardware and software requirements
-- **Phone:** Medtronic driver should work with any phone supporting BLE. **IMPORTANT: While driver works correctly on all phones, enabling/disabling Bluetooth doesn't (this is required when you loose connection to RileyLink and system can't recover automatically - happens from time to time). So you need to get device with Android 7.0 - 8.1, in worst case scenario you can  install LinegaeOS 15.1 (required 15.1 or lower) on your phone. We are looking into problem with Android 9, but so far we haven't found resolution (it seems to work on some models and not on others, and on also works sometimes on some models).**
-- **RileyLink/Gnarl:** For communication with Pump you need device that converts BT commands from Phone into RF commands that Pump understands. Device that does is called RileyLink (you can get it here [getrileylink.org](https://getrileylink.org/)). You need stable version of device, which is for older models firmware 0.9 (older versions might not work correctly) or for newer models 2.2 (there are options to upgrade available on RL site). If you are feeling adventurous you can also try Gnarl ([here](https://github.com/ecc1/gnarl)), which is sort-of RileyLink-clone.  
-- **Pump:** Driver works only with following models and firmware versions:
-    - 512/712
-    - 515/715
-    - 522/722
-    - 523/723 (firmware 2.4A or lower)
-    - 554/754 EU release (firmware 2.6A or lower)
-    - 554/754 Canada release (firmware 2.7A or lower)
-- Check for firmware is described in [OpenAPS docs](https://openaps.readthedocs.io/en/latest/docs/Gear%20Up/pump.html#how-to-check-pump-firmware-check-for-absence-of-pc-connect) and [LoopDocs](https://loopkit.github.io/loopdocs/build/step3/#medtronic-pump-firmware).
+- **Phone:** The Medtronic driver should work with any android phone that supports Bluetooth connections. **IMPORTANT: Phone manufacturers Bluetooth implementations can vary so how each phone model behaves can vary.  For example, some phones will handle enabling/disabling Bluetooth differently.  This can impact the user experience when AAPS needs to reconnect to your Rileylink type device.**
+- **RileyLink/Gnarl:** Android phones cannot communicate to Medtronic pumps without a seperate device to handle communications. This device will link with your phone via Bluetooth and with your pump via a compatible radio connection.  The first such devlice was called a Rileylink but a number of other options are now available which can offer additional functionality.
+
+    - Rileylink available at [getrileylink.org](https://getrileylink.org/product/rileylink916)
+    - Orangelink available at [getrileylink.org](https://getrileylink.org/product/orangelink)
+    - Emalink (multiple model options) available at [google.com](https://docs.google.com/forms/d/e/1FAIpQLSdcHBUN6e1yPxxvlaXYRBL1liF9W8OYDOpTR2tWquXESo0bKg/viewform)
+
+A comparision chart for the various Rileylink compatible devices can be found at [getrileylink.org](https://getrileylink.org/rileylink-compatible-hardware-comparison-chart?fbclid=IwAR2vHbOzla-zmM-cSp4NkOB_23k3spgnaYvCIGRcACcIQ25FJAU_7HRkH2A)
+
+For communication with Pump you need device that converts BT commands from Phone into RF commands that Pump understands. Device that does is called RileyLink (you can get it here [getrileylink.org](https://getrileylink.org/)). You need stable version of device, which is for older models firmware 0.9 (older versions might not work correctly) or for newer models 2.2 (there are options to upgrade available on RL site). If you are feeling adventurous you can also try Gnarl ([here](https://github.com/ecc1/gnarl)), which is sort-of RileyLink-clone.
 
 ## Configuration of the pump
 - **Enable remote mode on Pump** (Utilities -> Remote Options, Select Yes, and on next screen do Add ID and add dummy id (111111 or something). You need to at least one ID on that Remote IDs list. This options might look differently on different model of pump. This step is important, because when set, Pump will listen more often for remote communication.
