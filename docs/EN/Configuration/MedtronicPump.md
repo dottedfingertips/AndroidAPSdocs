@@ -130,13 +130,13 @@ In the event you need to troubleshoot your Medtronic pump function select the me
 Medtronic CGM is currently NOT supported.
 
 ### Manual use of pump
-You should avoid manually doing treatments things on your pump. All commands (bolus, TBR) should go through AndroidAPS, but if it happens that you will do manual commands, do NOT run commands with frequency less than 3 minutes (so if you do 2 boluses (for whatever reason), second should be started at least 3 minutes after first one).
+You should avoid manually bolusing or setting TBRs on your pump. All such commands should be sent via AndroidAPS.  In the event manual commands are used there must be a delay of at least 3 minutes between them in order to reduce the risk of any issues. 
 
 ## Timezone changes and DST (Daylight Saving Time) or Traveling with Medtronic Pump and AndroidAPS
 
-Important thing to remember is that you should never disable loop when you are traveling (unless your CGMS can't do offline mode). AAPS will automatically detect Timezone changes and will send command to Pump to change time, when time on Phone is changed. 
+AndroidAPS will automatically detect Timezone changes and will update the Pump's time when your phone switches to the new time. 
 
-Now if you travel to East and your TZ changes with adding hours (ex. from GMT+0 to GMT+2), pump history won't have problem and you don't have to worry... but if you travel to West and your TZ changes by removing hours (GMT+2 to GMT-0), then sychronization might be little iffy. In clear text, that means that for next x hours you will have to be careful, because your IOB, might be little weird. 
+Travelling east means you are going to be adding hours to the current time (ex. from GMT+0 to GMT+2) will not result in any issues as there will be no overlap (e.g. it won't be possible to have the same hour twice).  Travelling West however can result in issues  as you are effectively going back in time which can result in incorrect IOB data.  
 
 We are aware of this problem, and we are already looking into possible solution (see https://github.com/andyrozman/RileyLinkAAPS/issues/145), but for now, have that info in mind when traveling.
 
@@ -144,30 +144,21 @@ We are aware of this problem, and we are already looking into possible solution 
 
 ## FAQ
 
-### Can I see the power of RileyLink/GNARL?
-No. At the moment none of this devices support this and it probably won't even in the future.
-
-### Is GNARL full replacement for RileyLink?
-Yes. Author of GNARL added all functions used by Medtronic driver. All Medtronic communication is supported (at time of the writing (June/2019). GNARL can't be used for Omnipod communication. Downside of GNARL is that you have to build it yourself, and you have to have compatible version of hardware.
-
-**Note from author:** Please note that the GNARL software is still experimental and lightly tested, and should not be considered as safe to use as a RileyLink.
-
-### Where can I get RileyLink or GNARL?
-Like mentioned before you can get devices here:
-- RileyLink - You can get device here - [getrileylink.org](https://getrileylink.org/).
-- GNARL - You can get info here, but device needs to be ordered elsewhere ([github.com/ecc1/gnarl](https://github.com/ecc1/gnarl)).
-
 ### What to do if I loose connection to RileyLink and/or pump?
-1. Run "Wake Up and Tune" action, this will try to find right frequency to communicate with pump.
-2. Disable Bluetooth, wait 10s and enable it again. This will force reconnecting to RileyLink.
-3. Reset RileyLink, after you do that do not forget to run "Reset RileyLink Config" action.
-4. Try 3 and 2 together.
-5. Reset RileyLink and reset phone.
+There are a number of options to try and resolve connectivity issues.
+- Use the "Wake Up and Tune" button in the ACT tab as detailed above.
+- Disable Bluetooth on your phone, wait 10 seconds and then enable it again. This will force the Rileylink device to reconnect to the phone.
+- Reset the Rileylink device.  You must then use the "Reset Rileylink Config" button in the ACT tab.
+- Other users have found the following steps  to be effective in restoring connectivity when other methods have not:
+    1. Restart the phone
+    2. *While* the phone is restarting restart the Rileylink device
+    3. Open AndroidAPS and allow the connection to restore
+
 
 ### How to determine what Frequency my pump uses
 ![Pump Model](../images/Medtronic06.png)
 
-If you turn your pump around in first line on right side you will see special 3 letter code. First two letters determine frequency type and last one determines color. Here are possible values for Frequency:
+On the back of the pump you will find a line detailing your model number along with a special 3 letter code. The first two letters determine the frequency type and the last one determines color. Here are possible values for Frequency:
 - NA - North America (in frequency selection you need to select "US & Canada (916 MHz)")
 - CA - Canada (in frequency selection you need to select "US & Canada (916 MHz)")
 - WW - Worldwide (in frequency selection you need to select "Worldwide (868 Mhz)")
