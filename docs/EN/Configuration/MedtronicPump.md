@@ -60,8 +60,8 @@ While setting up AndroidAPS to work with your medtronic pump you need to set fol
 - **Pump Frequency**: There are two options based on where your pump was originally distributed.  Please check the FAQ if you are unsure which option to select  [FAQ](../Configuration/MedtronicPump#faq)):
     - for US & Canada, frequency used is 916 Mhz
     - for Worldwide, frequency used is 868 Mhz
-- **Max Bolus on Pump (U)** (in an hour): This needs to match the setting set on your pump (see Configuration of the pump above).  This setting should be carefully considered as it determines how large a bolus AndroidAPS can ever set.
 - **Max Basal on Pump (U/h)**: This needs to match the setting set on your pump (see Configuration of the pump above).  Again this setting must be carefully selected as it will determine how much AndroidAPS can deliver via your basal rate.  This will effectively set the maximum temporary basal rate.  As an example setting this value to four times your maximum standard basal rate would allow a 400% Temporary Basal Rate. The maximum value permitted by the pump is 34.9 units per hour.
+- **Max Bolus on Pump (U)** (in an hour): This needs to match the setting set on your pump (see Configuration of the pump above).  This setting should be carefully considered as it determines how large a bolus AndroidAPS can ever set.
 - **Delay before Bolus is started (s)**: The number of seconds after a bolus is issued before the command is actually sent to the pump.  This period of time allows the user to cancel the bolus in the event a bolus command is sent in error.  It is not possible to cancel a bolus that has started via AndroidAPS.  The only way to cancel a bolus that has already started is to suspend the pump manually followed by resuming it.
 - **Medtronic Encoding**: Determines if the medtronic encoding is carried out.  Selecting Hardware encoding (i.e. carried out by the Rileylink compatible device) is preferred as this results in less data being sent.  Selecting Software encoding (i.e. carried out by AndroidAPS) can help in the event frequent disconnects are seen. This setting will be ignored if you have firmware version 0.x on Rileylink devices.
 - **Battery Type (Power View)**: In order to correctly determine the remaining battery power level you should select the type of AAA battery in use. When a value other than simple view is selected AndroidAPS will display the remaining calculated battery percentage level and volts. The following options are available:
@@ -72,24 +72,28 @@ While setting up AndroidAPS to work with your medtronic pump you need to set fol
     - NiZn (Extended view)
     - NiMH (Extended view)
 
-- **RileyLink Configuration**: This option allows you to find and pair your Rileylink compatible device.  Selecting this will show any nearby Rileylink compatible devices and the signal strength 
+- **Bolus/Treatments Debugging**:  Select On or Off depending on requirements.
+- **RileyLink Configuration**: This option allows you to find and pair your Rileylink compatible device.  Selecting this will show any nearby Rileylink compatible devices and the signal strength.
+- **Use Scanning** Activates Bluetooth scanning before connecting with your Rileylink Compatible devices.  This should improve the reliability of your connection to the device.
+- **Show battery level reported by OrangeLink/EmaLink/DiaLink** This feature is only supported on newer link devices such as the EmaLink or OrangeLink. Values will be shown in the Medtronic tab in AnroidAPS. 
 - **Set neutral temp basals** By default Medtronic pumps beep on the hour when a temporary basal rate is active.  Enabling this option can help reduce the number of beeps heard by interupting a temporary basal at the hour change in order to supress the beep.
 
 ## MEDTRONIC (MDT) Tab
 ![MDT Tab](../images/Medtronic02.png)
 When AndroidAPS is configured to use a Medtronic pump a MDT tab will be shown in the list of tabs at the top of the screen.  This tab displays the current pump status information along with some Medtronic specific actions.
-- **RileyLink Status**: It shows status of RileyLink connection. Phone should be connected to RileyLink all the time.
-- **Pump Status**: Status of pump connection, this can have several values, but mostly we will see sleep icon (when pump connection is not active), when command is beeing executed, we might see "Waking Up", which is AAPS trying to make connection to your pump or description of any command that might be running on pump (ex.: Get Time, Set TBR, etc.).
-- **Battery**: Shows battery status depening on your configuration. This can be simple icon showing if battery is empty or full (red if battery is getting critical, under 20%), or percent and voltage.
-- **Last connection**: Time when last connection to pump was successful.
-- **Last Bolus**: When last bolus was given.
-- **Base Basal Rate**: This is the base basal rate that runs on pump at this hour.
-- **Temp basal**: Temp basal that is running or empty.
+- **RileyLink Status**: The current status of the connection between your phone and Rileylink compatible device.  This should show as Connected at all times. Any other status may require user intervention. 
+- **RileyLink Battery**: The current battery level of your EmaLink or OrangeLink device.  Dependent on selecting "Show battery level reported by OrangeLink/EmaLink/DiaLink device" in the Medtronic Pump Configuration menu.
+- **Pump Status**: The current status of the pump connection.  As the pump will not be constantly connected this will primarily show the sleep icon.  There are a number of possible other status including "Waking Up" when AndroidAPS is trying to issue a command or other possible pump commands such as "Get Time", "Set TBR", etc. 
+- **Battery**: Shows battery status based on the value chosen for Battery Type (Power View) in the Medtronic Pump Configuration menu.  
+- **Last connection**: How long ago the last succesful pump connection happened.
+- **Last Bolus**: How long ago the last succesful bolus was delivered.
+- **Base Basal Rate**: This is the base basal rate that runs on pump at this hour in your active Profile.
+- **Temp basal**: Temp basal currently being delivered which can be 0 units per hour.
 - **Reservoir**: How much insulin is in reservoir (updated at least every hour).
 - **Errors**: Error string if there is problem (mostly shows if there is error in configuration).
 
-On lower end we have 3 buttons:
-- **Refresh** is for refreshing state. This should be used only after connection was not present for long time, as this action will reset data about pump (retrieve history, get/set time, get profile, get battery status, etc).
+At the bottom of the screen there are three buttons:
+- **Refresh** is for refreshing the current status of the pump. This should only be used if the connection was lost for a sustained period as this will require a full data refresh (retrieve history, get/set time, get profile, get battery status, etc).
 - **Pump History**: Shows pump history (see [bellow](../Configuration/MedtronicPump#pump-history))
 - **RL Stats**: Show RL Stats (see [bellow](../Configuration/MedtronicPump#rl-status-rileylink-status))
 
