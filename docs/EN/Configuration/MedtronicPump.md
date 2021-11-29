@@ -134,7 +134,7 @@ We are aware of this problem, and we are already looking into possible solution 
 
 ### Is a GNARL a fully compatible Rileylink combatible device?
 
-The developer of the GNARL code fully supports all of the functions used by the Medtronic driver in AndroidAPS which means it is fully compatible.  It is important to note that this will require addtional work as you will have to source compatible hardware and then load the GNARL code on to the device.
+The GNARL code fully supports all of the functions used by the Medtronic driver in AndroidAPS which means it is fully compatible.  It is important to note that this will require addtional work as you will have to source compatible hardware and then load the GNARL code on to the device.
 
 **Note from author:** Please note that the GNARL software is still experimental and lightly tested, and should not be considered as safe to use as a RileyLink.
 
