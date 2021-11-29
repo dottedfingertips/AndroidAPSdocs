@@ -22,6 +22,7 @@ You can find out how to check the firmware on the pumps at [OpenAPS docs](https:
     - Rileylink available at [getrileylink.org](https://getrileylink.org/product/rileylink916)
     - Orangelink available at [getrileylink.org](https://getrileylink.org/product/orangelink)
     - Emalink (multiple model options) available at [github.com](https://github.com/sks01/EmaLink)
+    - Gnarl (some additional DIY required) details available at [github.com](https://github.com/ecc1/gnarl)
 
 A comparision chart for the various Rileylink compatible devices can be found at [getrileylink.org](https://getrileylink.org/rileylink-compatible-hardware-comparison-chart?fbclid=IwAR2vHbOzla-zmM-cSp4NkOB_23k3spgnaYvCIGRcACcIQ25FJAU_7HRkH2A)
 
@@ -123,7 +124,7 @@ Medtronic CGM is currently NOT supported.
 ### Manual use of pump
 You should avoid manually bolusing or setting TBRs on your pump. All such commands should be sent via AndroidAPS.  In the event manual commands are used there must be a delay of at least 3 minutes between them in order to reduce the risk of any issues. 
 
-## Timezone changes and DST (Daylight Saving Time) or Traveling with Medtronic Pump and AndroidAPS
+### Timezone changes and DST (Daylight Saving Time) or Traveling with Medtronic Pump and AndroidAPS
 
 AndroidAPS will automatically detect Timezone changes and will update the Pump's time when your phone switches to the new time. 
 
@@ -131,7 +132,11 @@ Travelling east means you are going to be adding hours to the current time (ex. 
 
 We are aware of this problem, and we are already looking into possible solution (see https://github.com/andyrozman/RileyLinkAAPS/issues/145), but for now, have that info in mind when traveling.
 
+### Is a GNARL a fully compatible Rileylink combatible device?
 
+The developer of the GNARL code fully supports all of the functions used by the Medtronic driver in AndroidAPS which means it is fully compatible.  It is important to note that this will require addtional work as you will have to source compatible hardware and then load the GNARL code on to the device.
+
+**Note from author:** Please note that the GNARL software is still experimental and lightly tested, and should not be considered as safe to use as a RileyLink.
 
 ## FAQ
 
