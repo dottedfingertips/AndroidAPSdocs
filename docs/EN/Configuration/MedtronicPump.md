@@ -92,7 +92,7 @@ At the bottom of the screen there are three buttons:
 ## Pump History
 ![Pump History Dialog](../images/Medtronic03.png)
 
-Pump history is retrieved every 5 minutes and stored localy. Only the previous 24 hours worth of history is stored.  The allows for a convinient way to see pump behaviour should that be required.  The only items stored are those relevenant to AndroidAPS and will not inlcude a configuration function that has no relevance. 
+Pump history is retrieved every 5 minutes and stored locally. Only the previous 24 hours worth of history is stored.  The allows for a convinient way to see pump behaviour should that be required.  The only items stored are those relevenant to AndroidAPS and will not inlcude a configuration function that has no relevance. 
 
 
 ## RL Status (RileyLink Status)
