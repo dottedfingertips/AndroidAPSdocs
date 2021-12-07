@@ -128,9 +128,9 @@ You should avoid manually bolusing or setting TBRs on your pump. All such comman
 
 AndroidAPS will automatically detect Timezone changes and will update the Pump's time when your phone switches to the new time. 
 
-Travelling east means you are going to be adding hours to the current time (ex. from GMT+0 to GMT+2) will not result in any issues as there will be no overlap (e.g. it won't be possible to have the same hour twice).  Travelling West however can result in issues  as you are effectively going back in time which can result in incorrect IOB data.  
+Travelling east means you are going to be adding hours to the current time (ex. from GMT+0 to GMT+2) will not result in any issues as there will be no overlap (e.g. it won't be possible to have the same hour twice).  Travelling west however can result in issues  as you are effectively going back in time which can result in incorrect IOB data.  
 
-We are aware of this problem, and we are already looking into possible solution (see https://github.com/andyrozman/RileyLinkAAPS/issues/145), but for now, have that info in mind when traveling.
+The issues seen when travelling west are known to the developers and work on a possible solution is ongoing.  See https://github.com/andyrozman/RileyLinkAAPS/issues/145 for more detail.  For now, please be aware that this issue may occur and carefully monitor when changing time zones.
 
 ### Is a GNARL a fully compatible Rileylink combatible device?
 
