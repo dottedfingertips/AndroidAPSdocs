@@ -116,7 +116,7 @@ When the Medtronic driver is used, two additional actions are added to Actions T
 OpenAPS users should note that AndroidAPS with Medtronic uses a completely different approach than OpenAPS.  Using AndroidAPS the primary method of interacting with th pump is via your phone.  In normal use cases it is likely that the only time it is required to use the pump menu is when changing resevoirs.  This is very different when using OpenAPS where at least some of a bolus is usually delivered via the quick bolus buttons.  In the event the pump is used to manually deliver a bolus there can be issues if AndroidAPS attempts to deliver one at the same time.  There are checks to try and prevent issues in such cases but this should still be avoided where possible.
 
 ### Logging
-In the event you need to troubleshoot your Medtronic pump function select the menu icon in the upper left corner of the screen, select Maintainance and Log Settings. Options Pump, PumpComm, PumpBTComm need to be checked.
+In the event you need to troubleshoot your Medtronic pump function select the menu icon in the upper left corner of the screen, select Maintainance and Log Settings. For troubleshooting any Medtronic issues Pump, PumpComm, PumpBTComm should be checked.
 
 ### Medtronic CGM
 Medtronic CGM is currently NOT supported.
