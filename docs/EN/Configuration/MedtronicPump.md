@@ -2,7 +2,7 @@
 
 ***
 
-The Medtronic pump driver only works with older pump models.  The driver does not work with newer models such as the 640G, 670G or 780G.
+The Medtronic pump driver only works with older pump models.  The driver does NOT work with newer models such as the 640G, 670G or 780G.
 
 The following model and firmware combinations are compatible:
 
