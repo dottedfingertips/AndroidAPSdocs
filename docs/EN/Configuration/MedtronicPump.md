@@ -22,16 +22,17 @@ You can find out how to check the firmware on the pumps at [OpenAPS docs](https:
     - Rileylink available at [getrileylink.org](https://getrileylink.org/product/rileylink916)
     - Orangelink available at [getrileylink.org](https://getrileylink.org/product/orangelink)
     - Emalink (multiple model options) available at [github.com](https://github.com/sks01/EmaLink)
+    - Gnarl (some additional DIY required) details available at [github.com](https://github.com/ecc1/gnarl)
 
 A comparision chart for the various Rileylink compatible devices can be found at [getrileylink.org](https://getrileylink.org/rileylink-compatible-hardware-comparison-chart)
 
 ## Configuration of the pump
-The following settings should be configured on the pump in order for AAPS to remotely send commands.  The steps necessary to make each change on a Medtronic 715 are shown in brackets for each setting.  The exact steps may vary based on pump type and/or firmware version.
+The following settings should be configured on the pump in order for AndroidAPS to remotely send commands.  The steps necessary to make each change on a Medtronic 715 are shown in brackets for each setting.  The exact steps may vary based on pump type and/or firmware version.
 
 - **Enable remote mode on Pump** (On the pump press Act and go to Utilities -> Remote Options, Select On, and on next screen do Add ID and add any random id such as  111111). At least one ID must be on the Remote ID list in order for the pump to expect remote communication.
 - **Set Max Basal** (On the pump press Act and got to Basal and then select Max Basal Rate) As an example setting this value to four times your maximum standard basal rate would allow a 400% Temporary Basal Rate. The maximum value permitted by the pump is 34.9 units per hour.
 - **Set Max Bolus** (On the pump press Act and to to Bolus and then select Max Bolus) This is the largest bolus that the pump will accept.  The maximum value permitted by the pump is 25.
-- **Set profile to Standard**. (On the pump press Act and go to Basal and then Select Patterns) The pump will only need one profile as AAPS will manage different profiles on your phone.  No other patterns are required.
+- **Set profile to Standard**. (On the pump press Act and go to Basal and then Select Patterns) The pump will only need one profile as AndroidAPS will manage different profiles on your phone.  No other patterns are required.
 - **Set Temporary Basal Rate type** (On the pump press Act and go to Basal and then Temp Basal Type).  Select Absolute (not Percent).
 
 ## Medtronic Configuration of Phone/AndroidAPS
@@ -91,7 +92,7 @@ At the bottom of the screen there are three buttons:
 ## Pump History
 ![Pump History Dialog](../images/Medtronic03.png)
 
-Pump history is retrieved every 5 minutes and stored localy. Only the previous 24 hours worth of history is stored.  The allows for a convinient way to see pump behaviour should that be required.  The only items stored are those relevenant to AndroidAPS and will not inlcude a configuration function that has no relevance. 
+Pump history is retrieved every 5 minutes and stored locally. Only the previous 24 hours worth of history is stored.  The allows for a convinient way to see pump behaviour should that be required.  The only items stored are those relevenant to AndroidAPS and will not inlcude a configuration function that has no relevance. 
 
 
 ## RL Status (RileyLink Status)
@@ -115,7 +116,7 @@ When the Medtronic driver is used, two additional actions are added to Actions T
 OpenAPS users should note that AndroidAPS with Medtronic uses a completely different approach than OpenAPS.  Using AndroidAPS the primary method of interacting with th pump is via your phone.  In normal use cases it is likely that the only time it is required to use the pump menu is when changing resevoirs.  This is very different when using OpenAPS where at least some of a bolus is usually delivered via the quick bolus buttons.  In the event the pump is used to manually deliver a bolus there can be issues if AndroidAPS attempts to deliver one at the same time.  There are checks to try and prevent issues in such cases but this should still be avoided where possible.
 
 ### Logging
-In the event you need to troubleshoot your Medtronic pump function select the menu icon in the upper left corner of the screen, select Maintainance and Log Settings. Options Pump, PumpComm, PumpBTComm need to be checked.
+In the event you need to troubleshoot your Medtronic pump function select the menu icon in the upper left corner of the screen, select Maintainance and Log Settings. For troubleshooting any Medtronic issues Pump, PumpComm, PumpBTComm should be checked.
 
 ### Medtronic CGM
 Medtronic CGM is currently NOT supported.
@@ -123,15 +124,19 @@ Medtronic CGM is currently NOT supported.
 ### Manual use of pump
 You should avoid manually bolusing or setting TBRs on your pump. All such commands should be sent via AndroidAPS.  In the event manual commands are used there must be a delay of at least 3 minutes between them in order to reduce the risk of any issues. 
 
-## Timezone changes and DST (Daylight Saving Time) or Traveling with Medtronic Pump and AndroidAPS
+### Timezone changes and DST (Daylight Saving Time) or Traveling with Medtronic Pump and AndroidAPS
 
 AndroidAPS will automatically detect Timezone changes and will update the Pump's time when your phone switches to the new time. 
 
-Travelling east means you are going to be adding hours to the current time (ex. from GMT+0 to GMT+2) will not result in any issues as there will be no overlap (e.g. it won't be possible to have the same hour twice).  Travelling West however can result in issues  as you are effectively going back in time which can result in incorrect IOB data.  
+Travelling east means you are going to be adding hours to the current time (ex. from GMT+0 to GMT+2) will not result in any issues as there will be no overlap (e.g. it won't be possible to have the same hour twice).  Travelling west however can result in issues  as you are effectively going back in time which can result in incorrect IOB data.  
 
-We are aware of this problem, and we are already looking into possible solution (see https://github.com/andyrozman/RileyLinkAAPS/issues/145), but for now, have that info in mind when traveling.
+The issues seen when travelling west are known to the developers and work on a possible solution is ongoing.  See https://github.com/andyrozman/RileyLinkAAPS/issues/145 for more detail.  For now, please be aware that this issue may occur and carefully monitor when changing time zones.
 
+### Is a GNARL a fully compatible Rileylink combatible device?
 
+The GNARL code fully supports all of the functions used by the Medtronic driver in AndroidAPS which means it is fully compatible.  It is important to note that this will require addtional work as you will have to source compatible hardware and then load the GNARL code on to the device.
+
+**Note from author:** Please note that the GNARL software is still experimental and lightly tested, and should not be considered as safe to use as a RileyLink.
 
 ## FAQ
 
